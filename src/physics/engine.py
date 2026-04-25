@@ -31,6 +31,11 @@ class ParticleEngine:
         self.power_absorbed_history = []
         self.time_elapsed = 0.0
 
+    def set_bounds(self, rect):
+        self.cavity_rect = rect
+        self.positions[:, 0] = np.clip(self.positions[:, 0], rect.left, rect.right)
+        self.positions[:, 1] = np.clip(self.positions[:, 1], rect.top, rect.bottom)
+
     def update(self, dt, wave_model, params):
         if abs(self.num_particles - params['density']) > 10:
             self._init_particles(params['density'])
@@ -80,6 +85,24 @@ class ParticleEngine:
         
         # Cooling
         self.temperatures -= (self.temperatures - 20.0) * 0.05 * dt_scaled
+        
+        # Temp cap
+        self.temperatures = np.clip(self.temperatures, 20.0, 500.0)
+        
+        # 4. Particle Collisions
+        radius = 6.0
+        diam_sq = (radius * 2.0)**2
+        diff = self.positions[:, np.newaxis, :] - self.positions[np.newaxis, :, :]
+        dist_sq = np.sum(diff**2, axis=-1)
+        np.fill_diagonal(dist_sq, np.inf)
+        
+        colliding = dist_sq < diam_sq
+        if np.any(colliding):
+            dist = np.sqrt(dist_sq)
+            overlap = np.maximum(0, (2.0 * radius) - dist)
+            direction = diff / (dist[..., np.newaxis] + 1e-6)
+            repulsion = np.sum(direction * overlap[..., np.newaxis], axis=1) * 200.0
+            self.velocities += repulsion * dt_scaled
         
         # Record stats
         self.avg_temp_history.append((self.time_elapsed, np.mean(self.temperatures)))

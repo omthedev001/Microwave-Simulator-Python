@@ -9,15 +9,15 @@ class MicrowaveView:
         
     def get_color(self, temp):
         if temp < 20: temp = 20
-        if temp > 100: temp = 100
+        if temp > 500: temp = 500
         
-        if temp < 60:
-            ratio = (temp - 20) / 40.0
+        if temp < 260:
+            ratio = (temp - 20) / 240.0
             r = int(COLOR_HEAT_LOW[0] * (1 - ratio) + COLOR_HEAT_MED[0] * ratio)
             g = int(COLOR_HEAT_LOW[1] * (1 - ratio) + COLOR_HEAT_MED[1] * ratio)
             b = int(COLOR_HEAT_LOW[2] * (1 - ratio) + COLOR_HEAT_MED[2] * ratio)
         else:
-            ratio = (temp - 60) / 40.0
+            ratio = (temp - 260) / 240.0
             r = int(COLOR_HEAT_MED[0] * (1 - ratio) + COLOR_HEAT_HIGH[0] * ratio)
             g = int(COLOR_HEAT_MED[1] * (1 - ratio) + COLOR_HEAT_HIGH[1] * ratio)
             b = int(COLOR_HEAT_MED[2] * (1 - ratio) + COLOR_HEAT_HIGH[2] * ratio)
@@ -46,11 +46,11 @@ class MicrowaveView:
             color = self.get_color(temp)
             
             px, py = int(pos[0]), int(pos[1])
-            dx = int(np.cos(angle) * 4)
-            dy = int(np.sin(angle) * 4)
+            dx = int(np.cos(angle) * 8)
+            dy = int(np.sin(angle) * 8)
             
-            pygame.draw.circle(screen, color, (px, py), 3)
-            pygame.draw.line(screen, (255,255,255), (px, py), (px+dx, py+dy), 1)
+            pygame.draw.circle(screen, color, (px, py), 6)
+            pygame.draw.line(screen, (255,255,255), (px, py), (px+dx, py+dy), 2)
 
         # Draw Heatmap Overlay
         overlay = pygame.Surface((self.rect.width, self.rect.height), pygame.SRCALPHA)

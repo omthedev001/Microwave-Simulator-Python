@@ -11,10 +11,13 @@ A complete, fully functional desktop application simulating the internal working
 *   **Live Data Visualizations:** Real-time graphs for Electric Field waveform, Average Temperature vs. Time, and Power Absorption.
 *   **Heatmap Overlay:** Visual representation of the temperature distribution inside the cavity.
 
-### Tab 2: Microwave Circuit Simulation
-*   **Interactive Circuit Diagram:** Visualizes the main components (Power Source, High-Voltage Transformer, Capacitor, Diode, and Magnetron).
-*   **Current Flow Animation:** Procedurally animated electron flow highlighting the active state.
-*   **Dynamic Component Highlighting:** The magnetron's visual output scales with the power slider.
+### Tab 2: Sub-Circuit Simulation
+*   **Detailed Quadrants:** View Power, Heating, Protection, and Control logic in isolation.
+*   **Conventional Oven Components:** Simulates realistic details including Thermal Cutouts, Monitor Switch short-circuit logic, and the voltage-doubler network.
+
+### Tab 3: Main Circuit Schematic
+*   **Full System Diagram:** A dense, unified schematic displaying the complete wiring diagram.
+*   **Holistic Simulation:** Traces AC current from the wall through the interlocks, transformer, and into the magnetron.
 
 ## Installation
 
