@@ -1,0 +1,29 @@
+import pygame
+
+# Application Settings
+APP_TITLE = "Microwave Simulator"
+WINDOW_WIDTH = 1280
+WINDOW_HEIGHT = 720
+FPS = 60
+
+# Colors
+COLOR_BG = (30, 30, 35)
+COLOR_PANEL = (45, 45, 55)
+COLOR_TEXT = (220, 220, 220)
+COLOR_CAVITY = (20, 20, 25)
+COLOR_GRAPH_LINE = (0, 200, 150)
+COLOR_GRAPH_BG = (40, 40, 48)
+
+# Physics Colors
+COLOR_HEAT_LOW = (0, 150, 255)   # Cold (Blue)
+COLOR_HEAT_MED = (255, 100, 50)  # Warm (Orange/Red)
+COLOR_HEAT_HIGH = (255, 255, 255) # Hot (White)
+
+# Default Simulation Parameters
+DEFAULT_FREQ_GHZ = 2.45
+DEFAULT_AMPLITUDE = 50.0
+DEFAULT_VOLTAGE = 220.0
+DEFAULT_POWER = 800.0 # Watts
+DEFAULT_SPEED = 1.0
+DEFAULT_PARTICLE_COUNT = 1000
+DEFAULT_ABSORPTION = 0.5
